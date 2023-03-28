@@ -1,0 +1,11 @@
+{
+  "name": "basic-weather",
+  "version": "1.0.0",
+  "description": "Serving basic weather data",
+  "main": "app.js",
+  "author": "big-charter",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
