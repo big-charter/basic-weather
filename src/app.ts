@@ -1,13 +1,15 @@
-const express = require("express");
+import express, { Express, Request, Response } from "express";
+// Load .env
+require("dotenv").config();
 
-const app = express();
+const app: Express = express();
 const port = 3000;
 
 // Serve the static directory
 app.use(express.static("src"));
 
-// Create a route for handling GET requests to the API endpoint
-app.get("/weather", async (req, res) => {
+// Handle GET /weather?zip=ZIPCODE
+app.get("/weather", async (req: Request, res: Response) => {
   const { zip } = req.query;
   if (!zip) {
     console.error("Did not receive a zip code");
@@ -16,7 +18,7 @@ app.get("/weather", async (req, res) => {
   }
 
   try {
-    const apiKey = "foo";
+    const apiKey = process.env.API_KEY;
     fetch(
       `http://api.openweathermap.org/geo/1.0/zip?zip=${zip}&appid=${apiKey}`
     )
