@@ -19,6 +19,11 @@ const app = (0, express_1.default)();
 const port = 3000;
 // Serve the static directory
 app.use(express_1.default.static("src"));
+// Helper to convert Kelvin to Fahrenheit
+const kelvinToFahrenheit = (kelvin) => {
+    const fahrenheit = ((kelvin - 273.15) * 9) / 5 + 32;
+    return Math.round(fahrenheit);
+};
 // Handle GET /weather?zip=ZIPCODE
 app.get("/weather", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { zip } = req.query;
@@ -34,7 +39,9 @@ app.get("/weather", (req, res) => __awaiter(void 0, void 0, void 0, function* ()
             .then((data) => {
             fetch(`https://api.openweathermap.org/data/3.0/onecall?lat=${data.lat}&lon=${data.lon}&exclude=minutely&appid=${apiKey}`)
                 .then((response) => response.json())
-                .then((data) => res.json(data));
+                .then((data) => {
+                res.json(kelvinToFahrenheit(data.current.temp));
+            });
         });
     }
     catch (error) {

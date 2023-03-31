@@ -22,7 +22,12 @@
           .then((response) => response.json())
           .then((data) => {
             const result = JSON.stringify(data);
-            resultDiv.innerHTML = result;
+            resultDiv.innerHTML =
+              "<p> Current temp in " +
+              zip +
+              ": " +
+              result +
+              " degrees fahrenheit.</p>";
           })
           .catch((error) => {
             console.error(error);
