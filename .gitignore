@@ -1,11 +1,26 @@
-# Dependency directories
-node_modules/
+# dependencies
+/node_modules
 
-# dotenv environment variable files
+# next.js
+/.next/
+/out/
+
+# production
+/built
+/build
+
+# misc
+.DS_Store
+
+# debug
+npm-debug.log*
+
+# env files
 .env
 
-# compiled javascript
-built/
+# vercel
+.vercel
 
-# mac
-.DS_Store
+# typescript
+*.tsbuildinfo
+next-env.d.ts
