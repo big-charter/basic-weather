@@ -88,30 +88,32 @@ export default function Home() {
         <link rel="manifest" href="favicon_io/site.webmanifest"></link>
       </Head>
       <main className="p-3">
-        <div>
-          <form onSubmit={handleSubmit}>
-            <label htmlFor="zipCode">Zip code:</label>
-            <div className="form-group">
-              <input
-                type="text"
-                id="zipCode"
-                value={zipCode}
-                onChange={(event) => setZipCode(event.target.value)}
-              />
-              <button className="btn btn-primary mx-3" type="submit">
-                Get weather
-              </button>
-            </div>
-          </form>
-        </div>
+        <div className="d-flex flex-column align-items-center">
+          <div>
+            <form onSubmit={handleSubmit}>
+              <label htmlFor="zipCode">Zip code</label>
+              <div className="form-group">
+                <input
+                  type="text"
+                  id="zipCode"
+                  value={zipCode}
+                  onChange={(event) => setZipCode(event.target.value)}
+                />
+                <button className="btn btn-primary mx-3" type="submit">
+                  Get weather
+                </button>
+              </div>
+            </form>
+          </div>
 
-        <div>
-          {weatherData && (
-            <div>
-              <h2>Weather forecast for {zipCode}</h2>
-              {basicDisplay(weatherData)}
-            </div>
-          )}
+          <div className="mt-3">
+            {weatherData && (
+              <div>
+                <h2>Weather forecast for {zipCode}</h2>
+                {basicDisplay(weatherData)}
+              </div>
+            )}
+          </div>
         </div>
       </main>
     </>
