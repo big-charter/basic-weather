@@ -1,11 +1,21 @@
 import Head from "next/head";
-import Image from "next/image";
 import { Inter } from "next/font/google";
-import styles from "@/styles/Home.module.css";
+import React from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const [weatherData, setWeatherData] = React.useState<any>();
+
+  const [zipCode, setZipCode] = React.useState<string>("");
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    fetch(`http://localhost:3000/weather?zip=${zipCode}`)
+      .then((res) => res.json())
+      .then((data) => setWeatherData(data));
+  };
+
   return (
     <>
       <Head>
@@ -32,23 +42,31 @@ export default function Home() {
         ></link>
         <link rel="manifest" href="favicon_io/site.webmanifest"></link>
       </Head>
-      <main className={styles.main}>
-        <div className={styles.description}>
-          <p>Description</p>
+      <main className="p-3">
+        <div>
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="zipCode">Zip code:</label>
+            <div className="form-group">
+              <input
+                type="text"
+                id="zipCode"
+                value={zipCode}
+                onChange={(event) => setZipCode(event.target.value)}
+              />
+              <button className="btn btn-primary mx-3" type="submit">
+                Get weather
+              </button>
+            </div>
+          </form>
         </div>
 
-        <div className={styles.center}>
-          <p>Center</p>
-        </div>
-
-        <div className={styles.grid}>
-          <p>Item1</p>
-
-          <p>Item2</p>
-
-          <p>Item3</p>
-
-          <p>Item4</p>
+        <div>
+          {weatherData && (
+            <div>
+              <h2>Weather forecast for {zipCode}</h2>
+              <pre>{JSON.stringify(weatherData)}</pre>
+            </div>
+          )}
         </div>
       </main>
     </>

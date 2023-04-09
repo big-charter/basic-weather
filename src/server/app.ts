@@ -5,6 +5,14 @@ require("dotenv").config();
 const app: Express = express();
 const port = 3000;
 
+// enable CORS
+app.use(function (req, res, next) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  next();
+});
+
 app.get("/", async (req: Request, res: Response) => {
   res.json({ message: "Please call /weather?zip=ZIPCODE" });
 });
@@ -38,12 +46,10 @@ app.get("/weather", async (req: Request, res: Response) => {
       });
   } catch (error) {
     console.error(error);
-    res
-      .status(500)
-      .json({
-        message:
-          "Error retrieving weather data for zip code " + zip + ": " + error,
-      });
+    res.status(500).json({
+      message:
+        "Error retrieving weather data for zip code " + zip + ": " + error,
+    });
   }
 });
 
