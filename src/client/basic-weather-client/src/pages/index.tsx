@@ -1,6 +1,11 @@
 import Head from "next/head";
 import { Inter } from "next/font/google";
 import React from "react";
+import CurrentGeneralInfo from "@/components/CurrentGeneralInfo";
+import HourlyForecastItem from "@/components/HourlyForecastItem";
+import HourlyForecastList from "@/components/HourlyForecastList";
+import DailyForecastItem from "@/components/DailyForecastItem";
+import DailyForecastList from "@/components/DailyForecastList";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,51 +19,6 @@ export default function Home() {
     fetch(`http://localhost:3000/weather?zip=${zipCode}`)
       .then((res) => res.json())
       .then((data) => setWeatherData(data));
-  };
-
-  const timestampToDateString = (UNIX_timestamp: number) => {
-    const date = new Date(UNIX_timestamp * 1000);
-    const months = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ];
-    const year = date.getFullYear();
-    const month = months[date.getMonth()];
-    const day = date.getDate();
-    const dateString = month + " " + day + ", " + year;
-    return dateString;
-  };
-
-  const timestampToTimeString = (UNIX_timestamp: number) => {
-    return new Date(UNIX_timestamp * 1e3).toLocaleTimeString();
-  };
-
-  const basicDisplay = (data: any) => {
-    const currentDateString = timestampToDateString(data.current.dt);
-    const currentTimeString = timestampToTimeString(data.current.dt);
-    const sunriseTimeString = timestampToTimeString(data.current.sunrise);
-    const sunsetTimeString = timestampToTimeString(data.current.sunset);
-    const currentTemp = Math.round(data.current.temp);
-    return (
-      <>
-        <p>
-          {currentDateString} {currentTimeString}
-        </p>
-        <p>{sunriseTimeString} Sunrise</p>
-        <p>{sunsetTimeString} Sunset</p>
-        <p>{currentTemp}&#8457;</p>
-      </>
-    );
   };
 
   return (
@@ -88,32 +48,61 @@ export default function Home() {
         <link rel="manifest" href="favicon_io/site.webmanifest"></link>
       </Head>
       <main className="p-3">
-        <div className="d-flex flex-column align-items-center">
-          <div>
-            <form onSubmit={handleSubmit}>
-              <label htmlFor="zipCode">Zip code</label>
-              <div className="form-group">
-                <input
-                  type="text"
-                  id="zipCode"
-                  value={zipCode}
-                  onChange={(event) => setZipCode(event.target.value)}
-                />
-                <button className="btn btn-primary mx-3" type="submit">
-                  Get weather
-                </button>
-              </div>
-            </form>
+        <div className="container">
+          <div className="row">
+            <div className="col">
+              <form onSubmit={handleSubmit}>
+                <label htmlFor="zipCode">Zip code</label>
+                <div className="form-group">
+                  <input
+                    type="text"
+                    id="zipCode"
+                    value={zipCode}
+                    onChange={(event) => setZipCode(event.target.value)}
+                  />
+                  <button className="btn btn-light mx-3" type="submit">
+                    Get weather
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
-
-          <div className="mt-3">
-            {weatherData && (
-              <div>
-                <h2>Weather forecast for {zipCode}</h2>
-                {basicDisplay(weatherData)}
+          {weatherData && (
+            <div className="row mt-3">
+              <div className="col">
+                <div className="row">
+                  <div className="col">
+                    <div>
+                      <CurrentGeneralInfo
+                        zipCode={zipCode}
+                        weatherData={weatherData}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col">
+                    <div>
+                      <HourlyForecastList>
+                        {[1, 2, 3].map((i) => {
+                          return <HourlyForecastItem />;
+                        })}
+                      </HourlyForecastList>
+                    </div>
+                  </div>
+                </div>
               </div>
-            )}
-          </div>
+              <div className="col">
+                <div>
+                  <DailyForecastList>
+                    {[1, 2, 3].map((i) => {
+                      return <DailyForecastItem />;
+                    })}
+                  </DailyForecastList>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </main>
     </>
