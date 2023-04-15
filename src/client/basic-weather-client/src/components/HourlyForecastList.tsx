@@ -2,9 +2,13 @@ import React from "react";
 
 const HourlyForecastList = (props: any) => {
   return (
-    <div>
-      <p>List</p>
-      {props.children}
+    <div className="card">
+      <div className="card-body text-dark">
+        {props.hourlyForecast.map((hour: any) => {
+          console.log(hour);
+          return <div>{hour}</div>;
+        })}
+      </div>
     </div>
   );
 };

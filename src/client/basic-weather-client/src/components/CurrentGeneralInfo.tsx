@@ -1,6 +1,6 @@
 import React from "react";
 
-const CurrentGeneralInfo = (props: { zipCode: string; weatherData: any }) => {
+const CurrentGeneralInfo = (props: { zipCode: string; currentData: any }) => {
   const timestampToDateString = (UNIX_timestamp: number) => {
     const date = new Date(UNIX_timestamp * 1000);
     const months = [
@@ -29,12 +29,12 @@ const CurrentGeneralInfo = (props: { zipCode: string; weatherData: any }) => {
   };
 
   const basicDisplay = (data: any) => {
-    const currentDateString = timestampToDateString(data.current.dt);
-    const currentTimeString = timestampToTimeString(data.current.dt);
-    const sunriseTimeString = timestampToTimeString(data.current.sunrise);
-    const sunsetTimeString = timestampToTimeString(data.current.sunset);
-    const currentTemp = Math.round(data.current.temp);
-    const feelsLike = Math.round(data.current.feels_like);
+    const currentDateString = timestampToDateString(data.dt);
+    const currentTimeString = timestampToTimeString(data.dt);
+    const sunriseTimeString = timestampToTimeString(data.sunrise);
+    const sunsetTimeString = timestampToTimeString(data.sunset);
+    const currentTemp = Math.round(data.temp);
+    const feelsLike = Math.round(data.feels_like);
     return (
       <>
         <p>
@@ -51,7 +51,7 @@ const CurrentGeneralInfo = (props: { zipCode: string; weatherData: any }) => {
   return (
     <div>
       <h2>Weather forecast for {props.zipCode}</h2>
-      {basicDisplay(props.weatherData)}
+      {basicDisplay(props.currentData)}
     </div>
   );
 };
