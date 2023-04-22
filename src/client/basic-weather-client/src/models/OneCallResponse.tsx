@@ -5,7 +5,10 @@ import MinutelyForecast from "./MinutelyForecast";
 import WeatherAlert from "./WeatherAlert";
 
 type OneCallResponse = {
-  metaData: any;
+  lat: number;
+  lon: number;
+  timezone: string;
+  timezone_offset: number;
   currentWeather: CurrentWeather;
   minutely: MinutelyForecast[];
   hourly: HourlyForecast[];
