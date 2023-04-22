@@ -1,0 +1,14 @@
+import CurrentWeather from "./CurrentWeather";
+import DailyForecast from "./DailyForecast";
+import HourlyForecast from "./HourlyForecast";
+import MinutelyForecast from "./MinutelyForecast";
+import WeatherAlert from "./WeatherAlert";
+
+type OneCallResponse = {
+  metaData: any;
+  currentWeather: CurrentWeather;
+  minutely: MinutelyForecast[];
+  hourly: HourlyForecast[];
+  daily: DailyForecast[];
+  alerts: WeatherAlert[];
+};
