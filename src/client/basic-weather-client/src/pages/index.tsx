@@ -1,6 +1,6 @@
 import Head from "next/head";
 import React from "react";
-import Weather from "@/components/Weather";
+import WeatherHome from "@/components/WeatherHome";
 
 export default function Home() {
   return (
@@ -30,7 +30,7 @@ export default function Home() {
         <link rel="manifest" href="favicon_io/site.webmanifest"></link>
       </Head>
       <main className="p-3">
-        <Weather />
+        <WeatherHome />
       </main>
     </>
   );

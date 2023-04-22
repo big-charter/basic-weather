@@ -2,7 +2,7 @@ import CurrentGeneralInfo from "./CurrentGeneralInfo";
 import DailyForecastList from "./DailyForecastList";
 import HourlyForecastList from "./HourlyForecastList";
 
-const WeatherDisplay = (props: { zipCode: string; weatherData: any }) => {
+const WeatherDataDisplay = (props: { zipCode: string; weatherData: any }) => {
   return (
     <div className="container">
       <div className="row mt-3">
@@ -33,4 +33,4 @@ const WeatherDisplay = (props: { zipCode: string; weatherData: any }) => {
   );
 };
 
-export default WeatherDisplay;
+export default WeatherDataDisplay;

@@ -1,7 +1,7 @@
 import React from "react";
-import WeatherDisplay from "./WeatherDisplay";
+import WeatherDataDisplay from "./WeatherDataDisplay";
 
-const Weather = () => {
+const WeatherHome = () => {
   const [weatherData, setWeatherData] = React.useState<any>();
   const [zipCode, setZipCode] = React.useState<string>("");
   const [loading, setLoading] = React.useState<boolean>(false);
@@ -41,10 +41,10 @@ const Weather = () => {
         {loading && <div className="mt-3">Loading...</div>}
       </div>
       {weatherData && !loading && (
-        <WeatherDisplay zipCode={zipCode} weatherData={weatherData} />
+        <WeatherDataDisplay zipCode={zipCode} weatherData={weatherData} />
       )}
     </>
   );
 };
 
-export default Weather;
+export default WeatherHome;
