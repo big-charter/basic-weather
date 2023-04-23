@@ -1,6 +1,7 @@
 import CurrentWeather from "@/models/CurrentWeather";
 import {
   formatTemp,
+  formatWind,
   timestampToDateString,
   timestampToTimeString,
 } from "@/util/util";
@@ -25,6 +26,7 @@ const CurrentGeneralInfo = (props: {
         <p>Sunset: {sunsetTimeString}</p>
         <p>Current Temp: {formatTemp(data.temp)}</p>
         <p>Feels Like: {formatTemp(data.feels_like)}</p>
+        <p>Wind: {formatWind(data.wind_speed)}</p>
       </>
     );
   };
@@ -33,7 +35,7 @@ const CurrentGeneralInfo = (props: {
     <div>
       <h2>Weather forecast for {props.zipCode}</h2>
       <div className="card mb-4">
-        <div className="card-body text-dark">
+        <div className="card-body text-dark pb-0">
           {basicDisplay(props.currentData)}
         </div>
       </div>
