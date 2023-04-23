@@ -3,11 +3,13 @@ import React from "react";
 
 const HourlyForecastItem = (props: { hourlyForecast: HourlyForecast }) => {
   return (
-    <div className="card">
-      <div className="card-body text-dark">
-        <div>Time: {props.hourlyForecast.dt}</div>
-        <div>Temp: {props.hourlyForecast.temp}</div>
-        <div>Wind: {props.hourlyForecast.wind_speed}</div>
+    <div className="col">
+      <div className="card">
+        <div className="card-body text-dark">
+          <div>Time: {props.hourlyForecast.dt}</div>
+          <div>Temp: {props.hourlyForecast.temp}</div>
+          <div>Wind: {props.hourlyForecast.wind_speed}</div>
+        </div>
       </div>
     </div>
   );
