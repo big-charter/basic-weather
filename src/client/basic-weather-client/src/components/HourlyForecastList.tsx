@@ -1,12 +1,12 @@
+import HourlyForecast from "@/models/HourlyForecast";
 import React from "react";
 
-const HourlyForecastList = (props: any) => {
+const HourlyForecastList = (props: { hourly: HourlyForecast[] }) => {
   return (
     <div className="card">
       <div className="card-body text-dark">
-        {props.hourlyForecast.map((hour: any) => {
-          console.log(hour);
-          return <div>{hour}</div>;
+        {props.hourly.map((hourlyForecast: HourlyForecast) => {
+          return <div>{JSON.stringify(hourlyForecast)}</div>;
         })}
       </div>
     </div>

@@ -1,6 +1,10 @@
+import CurrentWeather from "@/models/CurrentWeather";
 import React from "react";
 
-const CurrentGeneralInfo = (props: { zipCode: string; currentData: any }) => {
+const CurrentGeneralInfo = (props: {
+  zipCode: string;
+  currentData: CurrentWeather;
+}) => {
   const timestampToDateString = (UNIX_timestamp: number) => {
     const date = new Date(UNIX_timestamp * 1000);
     const months = [

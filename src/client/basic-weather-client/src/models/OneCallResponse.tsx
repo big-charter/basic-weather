@@ -9,9 +9,11 @@ type OneCallResponse = {
   lon: number;
   timezone: string;
   timezone_offset: number;
-  currentWeather: CurrentWeather;
+  current: CurrentWeather;
   minutely: MinutelyForecast[];
   hourly: HourlyForecast[];
   daily: DailyForecast[];
   alerts: WeatherAlert[];
 };
+
+export default OneCallResponse;

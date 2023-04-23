@@ -1,8 +1,9 @@
 import React from "react";
 import WeatherDataDisplay from "./WeatherDataDisplay";
+import OneCallResponse from "@/models/OneCallResponse";
 
 const WeatherHome = () => {
-  const [weatherData, setWeatherData] = React.useState<any>();
+  const [weatherData, setWeatherData] = React.useState<OneCallResponse>();
   const [zipCode, setZipCode] = React.useState<string>("");
   const [loading, setLoading] = React.useState<boolean>(false);
 
@@ -11,7 +12,7 @@ const WeatherHome = () => {
     setLoading(true);
     fetch(`http://localhost:3000/weather?zip=${zipCode}`)
       .then((res) => res.json())
-      .then((data) => {
+      .then((data: OneCallResponse) => {
         setWeatherData(data);
         setLoading(false);
       });

@@ -7,7 +7,6 @@ type DailyForecast = {
   moonrise: number;
   moonset: number;
   moon_phase: number;
-  // Brekaout?
   temp: {
     day: number;
     min: number;
@@ -16,7 +15,6 @@ type DailyForecast = {
     eve: number;
     morn: number;
   };
-  // Breakout?
   feels_like: {
     day: number;
     night: number;

@@ -1,8 +1,12 @@
+import OneCallResponse from "@/models/OneCallResponse";
 import CurrentGeneralInfo from "./CurrentGeneralInfo";
 import DailyForecastList from "./DailyForecastList";
 import HourlyForecastList from "./HourlyForecastList";
 
-const WeatherDataDisplay = (props: { zipCode: string; weatherData: any }) => {
+const WeatherDataDisplay = (props: {
+  zipCode: string;
+  weatherData: OneCallResponse;
+}) => {
   return (
     <div className="container">
       <div className="row mt-3">
@@ -17,16 +21,12 @@ const WeatherDataDisplay = (props: { zipCode: string; weatherData: any }) => {
           </div>
           <div className="row">
             <div className="col">
-              <HourlyForecastList
-                hourlyForecast={["Hourly Item", "Hourly Item", "Hourly Item"]}
-              />
+              <HourlyForecastList hourly={props.weatherData.hourly} />
             </div>
           </div>
         </div>
         <div className="col">
-          <DailyForecastList
-            dailyForecast={["Daily Item", "Daily Item", "Daily Item"]}
-          />
+          <DailyForecastList daily={props.weatherData.daily} />
         </div>
       </div>
     </div>
