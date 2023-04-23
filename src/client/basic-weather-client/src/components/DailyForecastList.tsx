@@ -1,14 +1,13 @@
 import DailyForecast from "@/models/DailyForecast";
 import React from "react";
+import DailyForecastItem from "./DailyForecastItem";
 
 const DailyForecastList = (props: { daily: DailyForecast[] }) => {
   return (
-    <div className="card">
-      <div className="card-body text-dark">
-        {props.daily.map((dailyForecast: DailyForecast) => {
-          return <div>{JSON.stringify(dailyForecast)}</div>;
-        })}
-      </div>
+    <div>
+      {props.daily.map((dailyForecast: DailyForecast) => {
+        return <DailyForecastItem dailyForecast={dailyForecast} />;
+      })}
     </div>
   );
 };
