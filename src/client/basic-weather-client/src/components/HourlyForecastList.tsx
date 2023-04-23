@@ -3,13 +3,13 @@ import React from "react";
 import HourlyForecastItem from "./HourlyForecastItem";
 
 const HourlyForecastList = (props: { hourly: HourlyForecast[] }) => {
-  // Take first 4 hours for now
-  // TODO: actually select hours based on something
   return (
-    <div className="row">
-      {props.hourly.slice(0, 4).map((hourlyForecast: HourlyForecast) => {
-        return <HourlyForecastItem hourlyForecast={hourlyForecast} />;
-      })}
+    <div className="horizontal-scrollable p-0">
+      <div className="row flex-nowrap">
+        {props.hourly.map((hourlyForecast: HourlyForecast) => {
+          return <HourlyForecastItem hourlyForecast={hourlyForecast} />;
+        })}
+      </div>
     </div>
   );
 };

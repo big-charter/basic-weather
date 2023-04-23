@@ -6,6 +6,7 @@ const HourlyForecastItem = (props: { hourlyForecast: HourlyForecast }) => {
     <div className="col">
       <div className="card">
         <div className="card-body text-dark">
+          <div>Hour</div>
           <div>Time: {props.hourlyForecast.dt}</div>
           <div>Temp: {props.hourlyForecast.temp}</div>
           <div>Wind: {props.hourlyForecast.wind_speed}</div>

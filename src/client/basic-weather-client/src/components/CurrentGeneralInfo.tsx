@@ -55,7 +55,11 @@ const CurrentGeneralInfo = (props: {
   return (
     <div>
       <h2>Weather forecast for {props.zipCode}</h2>
-      {basicDisplay(props.currentData)}
+      <div className="card mb-4">
+        <div className="card-body text-dark">
+          {basicDisplay(props.currentData)}
+        </div>
+      </div>
     </div>
   );
 };

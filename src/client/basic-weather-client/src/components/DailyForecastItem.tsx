@@ -6,6 +6,7 @@ const DailyForecastItem = (props: { dailyForecast: DailyForecast }) => {
     <div className="col">
       <div className="card">
         <div className="card-body text-dark">
+          <div>Day</div>
           <div>Time: {props.dailyForecast.dt}</div>
           <div>Temp: {props.dailyForecast.temp.day}</div>
           <div>Wind: {props.dailyForecast.wind_speed}</div>
