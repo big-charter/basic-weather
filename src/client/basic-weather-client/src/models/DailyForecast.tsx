@@ -1,3 +1,5 @@
+import WeatherCondition from "./WeatherCondition";
+
 type DailyForecast = {
   dt: number;
   sunrise: number;
@@ -27,13 +29,7 @@ type DailyForecast = {
   wind_speed: number;
   wind_deg: number;
   wind_gust: number;
-  // TODO: Breakout into WeatherCondition
-  weather: {
-    id: number;
-    main: string;
-    description: number;
-    icon: string;
-  }[];
+  weather: WeatherCondition[];
   clouds: number;
   pop: number;
   rain: number;

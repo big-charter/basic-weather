@@ -1,3 +1,5 @@
+import WeatherCondition from "./WeatherCondition";
+
 type CurrentWeather = {
   dt: number;
   sunrise: number;
@@ -13,14 +15,7 @@ type CurrentWeather = {
   wind_speed: number;
   wind_deg: number;
   wind_gust: number;
-  // Not really sure what this is.
-  // TODO: Once figured out, break out into its own type.
-  weather: {
-    id: number;
-    main: string;
-    description: string;
-    icon: string;
-  }[];
+  weather: WeatherCondition[];
 };
 
 export default CurrentWeather;

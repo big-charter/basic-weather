@@ -1,3 +1,5 @@
+import WeatherCondition from "./WeatherCondition";
+
 type HourlyForecast = {
   dt: number;
   temp: number;
@@ -11,14 +13,7 @@ type HourlyForecast = {
   wind_speed: number;
   wind_deg: number;
   wind_gust: number;
-  // WeatherCondition
-  // TODO: Breakout
-  weather: {
-    id: number;
-    main: string;
-    description: string;
-    icon: string;
-  }[];
+  weather: WeatherCondition[];
   pop: number;
 };
 
