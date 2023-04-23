@@ -1,24 +1,21 @@
 export const timestampToDateString = (UNIX_timestamp: number): string => {
-  const date = new Date(UNIX_timestamp * 1000);
-  const months = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
-  const year = date.getFullYear();
-  const month = months[date.getMonth()];
-  const day = date.getDate();
-  const dateString = month + " " + day + ", " + year;
-  return dateString;
+  return new Date(UNIX_timestamp * 1e3).toLocaleDateString([], {
+    dateStyle: "medium",
+  });
+};
+
+export const timestampToShortDateString = (UNIX_timestamp: number): string => {
+  const date = new Date(UNIX_timestamp * 1e3);
+  return (
+    date.toLocaleDateString([], {
+      weekday: "long",
+    }) +
+    ", " +
+    date.toLocaleDateString([], {
+      month: "long",
+      day: "numeric",
+    })
+  );
 };
 
 export const timestampToTimeString = (UNIX_timestamp: number): string => {

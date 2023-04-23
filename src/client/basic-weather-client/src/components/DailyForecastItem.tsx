@@ -1,4 +1,9 @@
 import DailyForecast from "@/models/DailyForecast";
+import {
+  formatTemp,
+  formatWind,
+  timestampToShortDateString,
+} from "@/util/util";
 import React from "react";
 
 const DailyForecastItem = (props: { dailyForecast: DailyForecast }) => {
@@ -6,10 +11,12 @@ const DailyForecastItem = (props: { dailyForecast: DailyForecast }) => {
     <div className="col">
       <div className="card">
         <div className="card-body text-dark">
-          <div>Day</div>
-          <div>Time: {props.dailyForecast.dt}</div>
-          <div>Temp: {props.dailyForecast.temp.day}</div>
-          <div>Wind: {props.dailyForecast.wind_speed}</div>
+          <h5>{timestampToShortDateString(props.dailyForecast.dt)}</h5>
+          <div>
+            {formatTemp(props.dailyForecast.temp.min)} -{" "}
+            {formatTemp(props.dailyForecast.temp.max)}
+          </div>
+          <div>{formatWind(props.dailyForecast.wind_speed)}</div>
         </div>
       </div>
     </div>
