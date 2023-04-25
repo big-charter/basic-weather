@@ -1,6 +1,10 @@
 body {
-  background-color: #1964af;
-  color: #f8f9fa;
+  background-color: #ffffff;
+  color: #909090;
+}
+
+.card {
+  background-color: #a9cff4;
 }
 
 .horizontal-scrollable {
