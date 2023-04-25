@@ -33,14 +33,15 @@ app.get("/weather", async (req: Request, res: Response) => {
       `http://api.openweathermap.org/geo/1.0/zip?zip=${zip}&appid=${apiKey}`
     )
       .then((response) => response.json())
-      .then((data) => {
+      .then((zipData) => {
         // Then we can call the one call API
         // Exclude minute-by-minute weather for now
         fetch(
-          `https://api.openweathermap.org/data/3.0/onecall?lat=${data.lat}&lon=${data.lon}&exclude=minutely&units=imperial&appid=${apiKey}`
+          `https://api.openweathermap.org/data/3.0/onecall?lat=${zipData.lat}&lon=${zipData.lon}&exclude=minutely&units=imperial&appid=${apiKey}`
         )
           .then((response) => response.json())
           .then((data) => {
+            data.name = zipData.name;
             res.json(data);
           });
       });
