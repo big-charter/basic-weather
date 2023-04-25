@@ -5,6 +5,7 @@ import {
   timestampToShortDateString,
 } from "@/util/util";
 import React from "react";
+import WeatherIcon from "./WeatherIcon";
 
 const DailyForecastItem = (props: { dailyForecast: DailyForecast }) => {
   return (
@@ -12,6 +13,7 @@ const DailyForecastItem = (props: { dailyForecast: DailyForecast }) => {
       <div className="card">
         <div className="card-body text-dark">
           <h5>{timestampToShortDateString(props.dailyForecast.dt)}</h5>
+          <WeatherIcon icon={props.dailyForecast.weather[0].icon} />
           <div>
             {formatTemp(props.dailyForecast.temp.min)} -{" "}
             {formatTemp(props.dailyForecast.temp.max)}
