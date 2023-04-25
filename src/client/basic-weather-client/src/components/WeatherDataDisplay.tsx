@@ -14,7 +14,7 @@ const WeatherDataDisplay = (props: {
           <div className="row">
             <div className="col">
               <CurrentGeneralInfo
-                zipCode={props.zipCode}
+                name={props.weatherData.name}
                 currentData={props.weatherData.current}
               />
             </div>

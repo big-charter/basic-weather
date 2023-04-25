@@ -7,6 +7,7 @@ import WeatherAlert from "./WeatherAlert";
 type OneCallResponse = {
   lat: number;
   lon: number;
+  name: string;
   timezone: string;
   timezone_offset: number;
   current: CurrentWeather;

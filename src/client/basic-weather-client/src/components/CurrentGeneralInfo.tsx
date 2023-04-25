@@ -9,7 +9,7 @@ import {
 import React from "react";
 
 const CurrentGeneralInfo = (props: {
-  zipCode: string;
+  name: string;
   currentData: CurrentWeather;
 }) => {
   const basicDisplay = (data: any) => {
@@ -33,7 +33,7 @@ const CurrentGeneralInfo = (props: {
 
   return (
     <div>
-      <h2>Weather forecast for {props.zipCode}</h2>
+      <h2>Weather forecast for {props.name}</h2>
       <div className="card mb-4">
         <div className="card-body text-dark pb-0">
           {basicDisplay(props.currentData)}
