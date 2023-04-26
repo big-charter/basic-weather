@@ -32,7 +32,7 @@ const WeatherHome = () => {
                   value={zipCode}
                   onChange={(event) => setZipCode(event.target.value)}
                 />
-                <button className="btn btn-light mx-3" type="submit">
+                <button className="btn btn-dark mx-3" type="submit">
                   Get weather
                 </button>
               </div>
