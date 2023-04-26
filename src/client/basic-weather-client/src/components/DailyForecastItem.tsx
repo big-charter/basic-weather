@@ -10,7 +10,7 @@ import WeatherIcon from "./WeatherIcon";
 const DailyForecastItem = (props: { dailyForecast: DailyForecast }) => {
   return (
     <div className="col">
-      <div className="card">
+      <div className="card shadow-sm">
         <div className="card-body text-dark">
           <h5>{timestampToShortDateString(props.dailyForecast.dt)}</h5>
           <WeatherIcon icon={props.dailyForecast.weather[0].icon} />

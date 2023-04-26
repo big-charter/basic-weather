@@ -34,7 +34,7 @@ const CurrentGeneralInfo = (props: {
   return (
     <div>
       <h2>Weather forecast for {props.name}</h2>
-      <div className="card mb-4">
+      <div className="card mb-4 shadow-sm">
         <div className="card-body text-dark pb-0">
           {basicDisplay(props.currentData)}
         </div>
