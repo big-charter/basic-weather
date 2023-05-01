@@ -1,22 +1,72 @@
 import React from "react";
 import WeatherDataDisplay from "./WeatherDataDisplay";
 import OneCallResponse from "@/models/OneCallResponse";
+import getConfig from "next/config";
+
+const publicRuntimeConfig = getConfig().publicRuntimeConfig;
 
 const WeatherHome = () => {
   const [weatherData, setWeatherData] = React.useState<OneCallResponse>();
   const [zipCode, setZipCode] = React.useState<string>("");
   const [loading, setLoading] = React.useState<boolean>(false);
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const fetchWeatherData = () => {
     setLoading(true);
-    fetch(`http://localhost:3000/weather?zip=${zipCode}`)
+    fetch(`http://localhost:3000/weather?zip=${zipCode || "43215"}`)
       .then((res) => res.json())
       .then((data: OneCallResponse) => {
+        console.log(data);
         setWeatherData(data);
         setLoading(false);
       });
+    setLoading(false);
   };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    fetchWeatherData();
+  };
+
+  // Poll for data based on configurable high demand window
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      fetchWeatherData();
+    }, calculateRefreshInterval());
+
+    // clear the interval on unmount
+    return () => clearInterval(interval);
+  }, []);
+
+  // calculate the refresh interval based on the current time and the configured periods
+  function calculateRefreshInterval() {
+    const currentTime = new Date();
+    let refreshInterval;
+
+    const startTime = new Date(
+      currentTime.getFullYear(),
+      currentTime.getMonth(),
+      currentTime.getDate(),
+      publicRuntimeConfig.highDemandWindowStartHour,
+      0
+    );
+    const endTime = new Date(
+      currentTime.getFullYear(),
+      currentTime.getMonth(),
+      currentTime.getDate(),
+      publicRuntimeConfig.highDemandWindowEndHour,
+      0
+    );
+
+    // Update the refresh interval based on the current window
+    if (currentTime >= startTime && currentTime < endTime) {
+      refreshInterval =
+        publicRuntimeConfig.highDemandWindowInterval * 60 * 1000;
+    } else {
+      refreshInterval = publicRuntimeConfig.lowDemandWindowInterval * 60 * 1000;
+    }
+
+    return refreshInterval;
+  }
 
   return (
     <>
