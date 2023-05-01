@@ -15,11 +15,9 @@ const WeatherHome = () => {
     fetch(`http://localhost:3000/weather?zip=${zipCode || "43215"}`)
       .then((res) => res.json())
       .then((data: OneCallResponse) => {
-        console.log(data);
         setWeatherData(data);
         setLoading(false);
       });
-    setLoading(false);
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
