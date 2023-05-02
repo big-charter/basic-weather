@@ -17,6 +17,10 @@ const WeatherHome = () => {
       .then((data: OneCallResponse) => {
         setWeatherData(data);
         setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching weather data:", error);
+        setLoading(false);
       });
   };
 
