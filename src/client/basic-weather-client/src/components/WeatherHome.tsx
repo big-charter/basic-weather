@@ -7,12 +7,13 @@ const publicRuntimeConfig = getConfig().publicRuntimeConfig;
 
 const WeatherHome = () => {
   const [weatherData, setWeatherData] = React.useState<OneCallResponse>();
-  const [zipCode, setZipCode] = React.useState<string>("");
   const [loading, setLoading] = React.useState<boolean>(false);
+  const [zipCode, setZipCode] = React.useState<string>("");
+  const zipCodeRef = React.useRef("");
 
   const fetchWeatherData = () => {
     setLoading(true);
-    fetch(`http://localhost:3000/weather?zip=${zipCode || "43215"}`)
+    fetch(`http://localhost:3000/weather?zip=${zipCode}`)
       .then((res) => res.json())
       .then((data: OneCallResponse) => {
         setWeatherData(data);
@@ -26,11 +27,13 @@ const WeatherHome = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    zipCodeRef.current = zipCode;
     fetchWeatherData();
   };
 
   // Poll for data based on configurable high demand window
   React.useEffect(() => {
+    setZipCode(zipCodeRef.current);
     const interval = setInterval(() => {
       fetchWeatherData();
     }, calculateRefreshInterval());
@@ -61,10 +64,9 @@ const WeatherHome = () => {
 
     // Update the refresh interval based on the current window
     if (currentTime >= startTime && currentTime < endTime) {
-      refreshInterval =
-        publicRuntimeConfig.highDemandWindowInterval * 60 * 1000;
+      refreshInterval = publicRuntimeConfig.highDemandWindowInterval * 60 * 10;
     } else {
-      refreshInterval = publicRuntimeConfig.lowDemandWindowInterval * 60 * 1000;
+      refreshInterval = publicRuntimeConfig.lowDemandWindowInterval * 60 * 10;
     }
 
     return refreshInterval;
