@@ -2,6 +2,7 @@ import React from "react";
 import WeatherDataDisplay from "./WeatherDataDisplay";
 import OneCallResponse from "@/models/OneCallResponse";
 import getConfig from "next/config";
+import { RingLoader } from "react-spinners";
 
 const publicRuntimeConfig = getConfig().publicRuntimeConfig;
 
@@ -12,6 +13,10 @@ const WeatherHome = () => {
   const zipCodeRef = React.useRef<string>(initialZipCode);
 
   const fetchWeatherData = () => {
+    // Do nothing if we haven't set a zip code
+    if (zipCodeRef.current == "") {
+      return;
+    }
     setLoading(true);
     fetch(`http://localhost:3000/weather?zip=${zipCodeRef.current}`)
       .then((res) => res.json())
@@ -32,10 +37,6 @@ const WeatherHome = () => {
 
   // Poll for data based on configurable high demand window
   React.useEffect(() => {
-    // Do nothing if we haven't set a zip code yet
-    if (zipCodeRef.current == "") {
-      return;
-    }
     const interval = setInterval(() => {
       fetchWeatherData();
     }, calculateRefreshInterval());
@@ -87,7 +88,7 @@ const WeatherHome = () => {
           <div className="col">
             <form onSubmit={handleSubmit}>
               <label htmlFor="zipCode">Zip code</label>
-              <div className="form-group">
+              <div className="form-group d-flex">
                 <input
                   type="text"
                   id="zipCode"
@@ -97,13 +98,13 @@ const WeatherHome = () => {
                 <button className="btn btn-dark mx-3" type="submit">
                   Get weather
                 </button>
+                {loading && <RingLoader size={30} />}
               </div>
             </form>
           </div>
         </div>
-        {loading && <div className="mt-3">Loading...</div>}
       </div>
-      {weatherData && !loading && (
+      {weatherData && (
         <WeatherDataDisplay
           zipCode={zipCodeRef.current}
           weatherData={weatherData}
