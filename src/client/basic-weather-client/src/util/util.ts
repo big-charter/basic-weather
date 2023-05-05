@@ -31,3 +31,7 @@ export const formatTemp = (temp: number): string => {
 export const formatWind = (wind: number): string => {
   return Math.round(wind).toString() + " mph";
 };
+
+export const formatDecimalToPercentage = (decimal: number): string => {
+  return (decimal * 100).toString() + "%";
+};
