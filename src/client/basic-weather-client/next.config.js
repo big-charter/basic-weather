@@ -4,9 +4,8 @@ const nextConfig = {
   publicRuntimeConfig: {
     highDemandWindowStartHour: 5,
     highDemandWindowEndHour: 17,
-    // TODO: Remember to change this
     highDemandWindowInterval: 1,
-    lowDemandWindowInterval: 1,
+    lowDemandWindowInterval: 3,
   },
 };
 
