@@ -87,7 +87,9 @@ const WeatherHome = () => {
         <div className="row">
           <div className="col">
             <form onSubmit={handleSubmit}>
-              <label htmlFor="zipCode">Zip code</label>
+              <label className="mb-1" htmlFor="zipCode">
+                Zip code
+              </label>
               <div className="form-group d-flex">
                 <input
                   type="text"
