@@ -33,5 +33,5 @@ export const formatWind = (wind: number): string => {
 };
 
 export const formatDecimalToPercentage = (decimal: number): string => {
-  return (decimal * 100).toString() + "%";
+  return Math.round(decimal * 100).toString() + "%";
 };
