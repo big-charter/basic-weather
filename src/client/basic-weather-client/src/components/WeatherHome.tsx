@@ -7,12 +7,13 @@ const publicRuntimeConfig = getConfig().publicRuntimeConfig;
 
 const WeatherHome = () => {
   const [weatherData, setWeatherData] = React.useState<OneCallResponse>();
-  const [zipCode, setZipCode] = React.useState<string>("");
   const [loading, setLoading] = React.useState<boolean>(false);
+  const [initialZipCode, setInitialZipCode] = React.useState<string>("");
+  const zipCodeRef = React.useRef<string>(initialZipCode);
 
   const fetchWeatherData = () => {
     setLoading(true);
-    fetch(`http://localhost:3000/weather?zip=${zipCode || "43215"}`)
+    fetch(`http://localhost:3000/weather?zip=${zipCodeRef.current}`)
       .then((res) => res.json())
       .then((data: OneCallResponse) => {
         setWeatherData(data);
@@ -31,6 +32,10 @@ const WeatherHome = () => {
 
   // Poll for data based on configurable high demand window
   React.useEffect(() => {
+    // Do nothing if we haven't set a zip code yet
+    if (zipCodeRef.current == "") {
+      return;
+    }
     const interval = setInterval(() => {
       fetchWeatherData();
     }, calculateRefreshInterval());
@@ -70,6 +75,11 @@ const WeatherHome = () => {
     return refreshInterval;
   }
 
+  // update the zipCodeRef when the zipCode state changes
+  React.useEffect(() => {
+    zipCodeRef.current = initialZipCode;
+  }, [initialZipCode]);
+
   return (
     <>
       <div className="container">
@@ -81,8 +91,8 @@ const WeatherHome = () => {
                 <input
                   type="text"
                   id="zipCode"
-                  value={zipCode}
-                  onChange={(event) => setZipCode(event.target.value)}
+                  value={initialZipCode}
+                  onChange={(event) => setInitialZipCode(event.target.value)}
                 />
                 <button className="btn btn-dark mx-3" type="submit">
                   Get weather
@@ -94,7 +104,10 @@ const WeatherHome = () => {
         {loading && <div className="mt-3">Loading...</div>}
       </div>
       {weatherData && !loading && (
-        <WeatherDataDisplay zipCode={zipCode} weatherData={weatherData} />
+        <WeatherDataDisplay
+          zipCode={zipCodeRef.current}
+          weatherData={weatherData}
+        />
       )}
     </>
   );
