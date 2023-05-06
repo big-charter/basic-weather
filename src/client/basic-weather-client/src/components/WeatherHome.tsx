@@ -9,6 +9,7 @@ const publicRuntimeConfig = getConfig().publicRuntimeConfig;
 const WeatherHome = () => {
   const [weatherData, setWeatherData] = React.useState<OneCallResponse>();
   const [loading, setLoading] = React.useState<boolean>(false);
+  const [hasError, setHasError] = React.useState<boolean>(false);
   const [initialZipCode, setInitialZipCode] = React.useState<string>("");
   const zipCodeRef = React.useRef<string>(initialZipCode);
 
@@ -21,7 +22,12 @@ const WeatherHome = () => {
     fetch(`http://localhost:3000/weather?zip=${zipCodeRef.current}`)
       .then((res) => res.json())
       .then((data: OneCallResponse) => {
-        setWeatherData(data);
+        if (!data || data.cod == 400) {
+          setHasError(true);
+        } else {
+          setWeatherData(data);
+          setHasError(false);
+        }
         setLoading(false);
       })
       .catch((error) => {
@@ -105,8 +111,14 @@ const WeatherHome = () => {
             </form>
           </div>
         </div>
+        {hasError && (
+          <div className="alert alert-danger mt-3 p-2">
+            There was an error. Please try a different zip code.
+          </div>
+        )}
       </div>
-      {weatherData && (
+
+      {weatherData && !hasError && (
         <WeatherDataDisplay
           zipCode={zipCodeRef.current}
           weatherData={weatherData}

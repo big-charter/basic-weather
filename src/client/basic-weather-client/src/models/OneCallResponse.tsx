@@ -15,6 +15,7 @@ type OneCallResponse = {
   hourly: HourlyForecast[];
   daily: DailyForecast[];
   alerts: WeatherAlert[];
+  cod?: number;
 };
 
 export default OneCallResponse;
