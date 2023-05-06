@@ -1,16 +1,15 @@
 import React from "react";
 import WeatherDataDisplay from "./WeatherDataDisplay";
 import OneCallResponse from "@/models/OneCallResponse";
-import getConfig from "next/config";
 import { RingLoader } from "react-spinners";
-
-const publicRuntimeConfig = getConfig().publicRuntimeConfig;
+import { calculateRefreshInterval } from "@/util/util";
 
 const WeatherHome = () => {
   const [weatherData, setWeatherData] = React.useState<OneCallResponse>();
   const [loading, setLoading] = React.useState<boolean>(false);
   const [hasError, setHasError] = React.useState<boolean>(false);
   const [initialZipCode, setInitialZipCode] = React.useState<string>("");
+  // useRef to persist the zip code through refreshes
   const zipCodeRef = React.useRef<string>(initialZipCode);
 
   const fetchWeatherData = () => {
@@ -52,38 +51,7 @@ const WeatherHome = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // calculate the refresh interval based on the current time and the configured periods
-  function calculateRefreshInterval() {
-    const currentTime = new Date();
-    let refreshInterval;
-
-    const startTime = new Date(
-      currentTime.getFullYear(),
-      currentTime.getMonth(),
-      currentTime.getDate(),
-      publicRuntimeConfig.highDemandWindowStartHour,
-      0
-    );
-    const endTime = new Date(
-      currentTime.getFullYear(),
-      currentTime.getMonth(),
-      currentTime.getDate(),
-      publicRuntimeConfig.highDemandWindowEndHour,
-      0
-    );
-
-    // Update the refresh interval based on the current window
-    if (currentTime >= startTime && currentTime < endTime) {
-      refreshInterval =
-        publicRuntimeConfig.highDemandWindowInterval * 60 * 1000;
-    } else {
-      refreshInterval = publicRuntimeConfig.lowDemandWindowInterval * 60 * 1000;
-    }
-
-    return refreshInterval;
-  }
-
-  // update the zipCodeRef when the zipCode state changes
+  // Update the zipCodeRef when the zipCode state changes
   React.useEffect(() => {
     zipCodeRef.current = initialZipCode;
   }, [initialZipCode]);
