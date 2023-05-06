@@ -20,10 +20,14 @@ const CurrentGeneralInfo = (props: {
         <div className="card-body text-dark pb-0">
           <div className="row">
             <div className="col">
-              <p>
+              <h5>
                 {timestampToDateString(props.currentData.dt)}{" "}
                 {timestampToTimeString(props.currentData.dt)}
-              </p>
+              </h5>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col">
               <p>
                 <WeatherIcon icon={props.currentData.weather[0].icon} />
               </p>
