@@ -1,24 +1,4 @@
-import express, { Express, Request, Response } from "express";
-// Load .env
-require("dotenv").config();
-
-const app: Express = express();
-const port = 3000;
-
-// enable CORS
-app.use(function (req, res, next) {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-  next();
-});
-
-app.get("/", async (req: Request, res: Response) => {
-  res.json({ message: "Please call /weather?zip=ZIPCODE" });
-});
-
-// GET /weather?zip=ZIPCODE
-app.get("/weather", async (req: Request, res: Response) => {
+export default function handler(req, res) {
   const { zip } = req.query;
   if (!zip) {
     console.error("Did not receive a zip code");
@@ -52,9 +32,4 @@ app.get("/weather", async (req: Request, res: Response) => {
         "Error retrieving weather data for zip code " + zip + ": " + error,
     });
   }
-});
-
-// Start the server
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
-});
+}

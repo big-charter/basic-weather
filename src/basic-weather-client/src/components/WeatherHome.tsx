@@ -19,10 +19,11 @@ const WeatherHome = () => {
       return;
     }
     setLoading(true);
-    fetch(`http://localhost:3000/weather?zip=${zipCodeRef.current}`)
+    fetch(`/api/weather?zip=${zipCodeRef.current}`)
       .then((res) => res.json())
       .then((data: OneCallResponse) => {
-        if (!data || data.cod == 400) {
+        // There's probably a better way to check for an error
+        if (!data || data.cod == "400") {
           setHasError(true);
         } else {
           setWeatherData(data);
