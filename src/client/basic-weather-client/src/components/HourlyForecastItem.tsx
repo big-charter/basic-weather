@@ -10,15 +10,13 @@ import WeatherIcon from "./WeatherIcon";
 
 const HourlyForecastItem = (props: { hourlyForecast: HourlyForecast }) => {
   return (
-    <div className="col py-2">
-      <div className="card shadow-sm">
-        <div className="card-body text-dark text-nowrap">
-          <h5>{timestampToTimeString(props.hourlyForecast.dt)}</h5>
-          <WeatherIcon icon={props.hourlyForecast.weather[0].icon} />
-          <div>{formatTemp(props.hourlyForecast.temp)}</div>
-          <div>{formatWind(props.hourlyForecast.wind_speed)}</div>
-          <div>{formatDecimalToPercentage(props.hourlyForecast.pop)}</div>
-        </div>
+    <div className="card shadow-sm">
+      <div className="card-body text-dark text-nowrap">
+        <h5>{timestampToTimeString(props.hourlyForecast.dt)}</h5>
+        <WeatherIcon icon={props.hourlyForecast.weather[0].icon} />
+        <div>{formatTemp(props.hourlyForecast.temp)}</div>
+        <div>{formatWind(props.hourlyForecast.wind_speed)}</div>
+        <div>{formatDecimalToPercentage(props.hourlyForecast.pop)}</div>
       </div>
     </div>
   );

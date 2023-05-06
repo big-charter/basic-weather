@@ -6,8 +6,12 @@ const HourlyForecastList = (props: { hourly: HourlyForecast[] }) => {
   return (
     <div className="horizontal-scrollable">
       <div className="row flex-nowrap">
-        {props.hourly.map((hourlyForecast: HourlyForecast) => {
-          return <HourlyForecastItem hourlyForecast={hourlyForecast} />;
+        {props.hourly.map((hourlyForecast: HourlyForecast, index: number) => {
+          return (
+            <div key={index} className="col py-2">
+              <HourlyForecastItem hourlyForecast={hourlyForecast} />
+            </div>
+          );
         })}
       </div>
     </div>
