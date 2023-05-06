@@ -31,7 +31,7 @@ const CurrentGeneralInfo = (props: {
               <p>
                 <WeatherIcon icon={props.currentData.weather[0].icon} />
               </p>
-              <p>
+              <div>
                 {props.currentData.weather[0].main &&
                   props.currentData.weather[0].description && (
                     <p>
@@ -39,7 +39,7 @@ const CurrentGeneralInfo = (props: {
                       {props.currentData.weather[0].description}
                     </p>
                   )}
-              </p>
+              </div>
               <p>Sunrise: {timestampToTimeString(props.currentData.sunrise)}</p>
               <p>Sunset: {timestampToTimeString(props.currentData.sunset)}</p>
             </div>
