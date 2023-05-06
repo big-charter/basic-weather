@@ -8,7 +8,7 @@ const WeatherDataDisplay = (props: {
   weatherData: OneCallResponse;
 }) => {
   return (
-    <div className="container">
+    <div className="container main-container">
       <div className="row mt-3">
         <div className="col w-50">
           <div className="row">
