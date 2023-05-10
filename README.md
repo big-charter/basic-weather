@@ -22,9 +22,9 @@ This is a basic weather app built using the Next.js framework and the OpenWeathe
 ## Installation
 
 1. Clone the repository to your local machine.
-2. Navigate to the root folder of the project.
+2. Navigate to the basic-weather directory.
 3. Install dependencies by running `npm install` or `yarn install`.
-4. Create a `.env` file in src/basic-weather-client and add your OpenWeatherMap API key as follows:
+4. Create a `.env` file in the basic-weather directory and add your OpenWeatherMap API key as follows:
 
 ```
 API_KEY = YOUR_API_KEY
