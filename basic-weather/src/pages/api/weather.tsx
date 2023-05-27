@@ -1,4 +1,4 @@
-export default function handler(req, res) {
+export default function handler(req: any, res: any) {
   const { zip } = req.query;
   if (!zip) {
     console.error("Did not receive a zip code");
