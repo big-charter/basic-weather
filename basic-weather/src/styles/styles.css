@@ -1,16 +1,14 @@
-html {
-  height: 100%;
-}
-
 body {
   background: linear-gradient(to bottom, #dbeeff, #cbe6ff);
   color: #000000;
-  overflow: hidden;
+  overflow: auto;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 .main-container {
-  max-height: 620px;
-  overflow: hidden;
+  max-height: 900px;
+  overflow: hidden; 
 }
 
 .card {
@@ -25,4 +23,5 @@ body {
 
 .vertical-scrollable {
   overflow-y: scroll;
+  margin-top: 0;
 }
