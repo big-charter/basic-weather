@@ -73,7 +73,7 @@ const WeatherHome = () => {
                   onChange={(event) => setInitialZipCode(event.target.value)}
                 />
                 <button className="btn btn-dark mx-3" type="submit">
-                  Get weather
+                  Weather
                 </button>
                 {loading && <RingLoader size={30} />}
               </div>
