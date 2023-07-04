@@ -7,6 +7,7 @@ This is a basic weather app built using the Next.js framework and the OpenWeathe
 - Get current weather information for a given location by zip code.
 - Display weather data including temperature, weather condition, and icon; displays for current, daily, and hourly forecasts.
 - Automatically refreshes weather data at specified intervals.
+- Responsive UI
 
 ## Technologies Used
 
