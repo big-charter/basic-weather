@@ -1,35 +1,36 @@
-export default function handler(req: any, res: any) {
+export const config = {
+  api: {
+    externalResolver: true,
+  },
+};
+
+export default async function handler(req: any, res: any) {
   const { zip } = req.query;
+
   if (!zip) {
     console.error("Did not receive a zip code");
-    res.status(500).json({ message: "Did not receive a zip code" });
-    return;
+    return res.status(500).json({ message: "Did not receive a zip code" });
   }
 
   try {
     const apiKey = process.env.API_KEY;
-    // We have to get the lat and long from the zip code
-    fetch(
+
+    const zipResponse = await fetch(
       `http://api.openweathermap.org/geo/1.0/zip?zip=${zip}&appid=${apiKey}`
-    )
-      .then((response) => response.json())
-      .then((zipData) => {
-        // Then we can call the one call API
-        // Exclude minute-by-minute weather for now
-        fetch(
-          `https://api.openweathermap.org/data/3.0/onecall?lat=${zipData.lat}&lon=${zipData.lon}&exclude=minutely&units=imperial&appid=${apiKey}`
-        )
-          .then((response) => response.json())
-          .then((data) => {
-            data.name = zipData.name;
-            res.json(data);
-          });
-      });
+    );
+    const zipData = await zipResponse.json();
+
+    const weatherResponse = await fetch(
+      `https://api.openweathermap.org/data/3.0/onecall?lat=${zipData.lat}&lon=${zipData.lon}&exclude=minutely&units=imperial&appid=${apiKey}`
+    );
+    const data = await weatherResponse.json();
+
+    data.name = zipData.name;
+    res.json(data);
   } catch (error) {
     console.error(error);
     res.status(500).json({
-      message:
-        "Error retrieving weather data for zip code " + zip + ": " + error,
+      message: `Error retrieving weather data for zip code ${zip}: ${error}`,
     });
   }
 }
